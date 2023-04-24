@@ -1,5 +1,5 @@
 PROJECT_ID=devops-app-384609
-ENV=staging
+
 ZONE=us-central1-c
 
 GITHUB_SHA?=latest
