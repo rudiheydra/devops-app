@@ -19,6 +19,7 @@
 .DS_Store
 *.pem
 *key.json
+*.tfvars
 
 # debug
 npm-debug.log*
