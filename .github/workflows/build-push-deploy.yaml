@@ -34,23 +34,27 @@ jobs:
         #   service_account_key: ${{ secrets.GCE_SA_KEY }}
         #   project_id: ${{ env.PROJECT_ID }}
 
-      # Configure Docker to use the gcloud command-line tool as a credential
-      # helper for authentication
+      # Authenticate with gcloud
       - uses: /google-github-actions/auth@v1
         with:
-          service_account: ${{ secrets.GCE_SA_KEY }}
+          credentials_json: ${{ secrets.GCE_SA_KEY }}
           project_id: ${{ env.PROJECT_ID }}
 
+      # Configure Docker to use the gcloud command-line tool as a credential
+      # helper for authentication
       - run: |-
           gcloud --quiet auth configure-docker
+
       # Build the Docker image
       - name: Build
         run: |-
           make build
+
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
           make push
+
       - name: Deploy
         run: |-
           make deploy
